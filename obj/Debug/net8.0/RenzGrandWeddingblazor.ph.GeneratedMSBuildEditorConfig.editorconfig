@@ -1,0 +1,147 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = RenzGrandWeddingblazor.ph
+build_property.RootNamespace = RenzGrandWeddingblazor.ph
+build_property.ProjectDir = C:\Users\LENOVO\Desktop\CODEGENERATOR\Projects\RenzGrandWeddingblazor.ph\RenzGrandWeddingblazor.ph\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\LENOVO\Desktop\CODEGENERATOR\Projects\RenzGrandWeddingblazor.ph\RenzGrandWeddingblazor.ph
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Delivery_pge/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZWxpdmVyeV9wZ2VcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Delivery_pge/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZWxpdmVyeV9wZ2VcRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Delivery_pge/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZWxpdmVyeV9wZ2VcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Delivery_pge/Update.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZWxpdmVyeV9wZ2VcVXBkYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/ProductLine_pge/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0TGluZV9wZ2VcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/ProductLine_pge/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0TGluZV9wZ2VcRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/ProductLine_pge/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0TGluZV9wZ2VcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/ProductLine_pge/ProductLineModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0TGluZV9wZ2VcUHJvZHVjdExpbmVNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/ProductLine_pge/Update.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0TGluZV9wZ2VcVXBkYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Pullout_pge/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQdWxsb3V0X3BnZVxDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Pullout_pge/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQdWxsb3V0X3BnZVxEZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Pullout_pge/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQdWxsb3V0X3BnZVxJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Pullout_pge/PulloutModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQdWxsb3V0X3BnZVxQdWxsb3V0TW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Pullout_pge/Update.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQdWxsb3V0X3BnZVxVcGRhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Sales_pge/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTYWxlc19wZ2VcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Sales_pge/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTYWxlc19wZ2VcRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Sales_pge/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTYWxlc19wZ2VcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Sales_pge/Update.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTYWxlc19wZ2VcVXBkYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Title_pge/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUaXRsZV9wZ2VcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Title_pge/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUaXRsZV9wZ2VcRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Title_pge/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUaXRsZV9wZ2VcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Title_pge/TitleModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUaXRsZV9wZ2VcVGl0bGVNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Title_pge/Update.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUaXRsZV9wZ2VcVXBkYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-bhqz7bfdt3
+
+[C:/Users/LENOVO/Desktop/CODEGENERATOR/Projects/RenzGrandWeddingblazor.ph/RenzGrandWeddingblazor.ph/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-xyercc95b3
