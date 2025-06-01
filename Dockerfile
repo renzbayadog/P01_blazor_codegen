@@ -17,6 +17,19 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get install -y nodejs && \
     npm install
 
+#FROM node:18
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "start"]
+
+
 # Build the .NET app
 RUN dotnet publish -c Release -o out
 
