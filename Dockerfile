@@ -7,7 +7,7 @@ COPY RenzGrandWeddingblazor.ph.csproj ./
 RUN dotnet restore
 
 COPY package*.json ./
-RUN npm install
+RUN npm restore
 
 # Copy the rest of the source code
 COPY . .
