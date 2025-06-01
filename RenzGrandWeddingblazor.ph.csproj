@@ -35,10 +35,10 @@
     <EmbeddedResource Include="Data\SeedData\Sales.csv" />
     <EmbeddedResource Include="Data\SeedData\ProductLine.csv" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Reference Include="codegeneratorlib">
-      <HintPath>..\..\codegeneratorlib\codegeneratorlib\bin\Debug\net8.0\codegeneratorlib.dll</HintPath>
+      <HintPath>librarybin\codegeneratorlib.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
