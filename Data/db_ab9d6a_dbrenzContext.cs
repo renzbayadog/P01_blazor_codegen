@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace RenzGrandWeddingblazor.ph.Data.Entities;
 
-public class AppDB1Context : DbContext
+public class db_ab9d6a_dbrenzContext : DbContext
 {
-    public AppDB1Context(DbContextOptions<AppDB1Context> options)
+    public db_ab9d6a_dbrenzContext(DbContextOptions<db_ab9d6a_dbrenzContext> options)
         : base(options)
     {
 

@@ -15,9 +15,9 @@ namespace RenzGrandWeddingblazor.ph.Data.Repositories
 {
     internal class ProductLineRepository : RepositoryBase<ProductLine>, IProductLineRepository
     {
-        private readonly AppDB1Context _context;
+        private readonly db_ab9d6a_dbrenzContext _context;
 
-        public ProductLineRepository(AppDB1Context context) : base(context)
+        public ProductLineRepository(db_ab9d6a_dbrenzContext context) : base(context)
         {
             _context = context;
         }

@@ -25,9 +25,9 @@ namespace RenzGrandWeddingblazor.ph.Data.Repositories
     }
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        private AppDB1Context _context;
+        private db_ab9d6a_dbrenzContext _context;
         
-        public RepositoryBase(AppDB1Context context)
+        public RepositoryBase(db_ab9d6a_dbrenzContext context)
         {
             _context = context;
         }

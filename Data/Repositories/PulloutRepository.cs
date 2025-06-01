@@ -15,9 +15,9 @@ namespace RenzGrandWeddingblazor.ph.Data.Repositories
 {
     internal class PulloutRepository : RepositoryBase<Pullout>, IPulloutRepository
     {
-        private readonly AppDB1Context _context;
+        private readonly db_ab9d6a_dbrenzContext _context;
 
-        public PulloutRepository(AppDB1Context context) : base(context)
+        public PulloutRepository(db_ab9d6a_dbrenzContext context) : base(context)
         {
             _context = context;
         }

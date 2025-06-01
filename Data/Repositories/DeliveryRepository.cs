@@ -15,9 +15,9 @@ namespace RenzGrandWeddingblazor.ph.Data.Repositories
 {
     internal class DeliveryRepository : RepositoryBase<Delivery>, IDeliveryRepository
     {
-        private readonly AppDB1Context _context;
+        private readonly db_ab9d6a_dbrenzContext _context;
 
-        public DeliveryRepository(AppDB1Context context) : base(context)
+        public DeliveryRepository(db_ab9d6a_dbrenzContext context) : base(context)
         {
             _context = context;
         }

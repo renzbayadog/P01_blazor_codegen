@@ -26,7 +26,7 @@ namespace RenzGrandWeddingblazor.ph.Middleware
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AppDB1Context>(o => o.UseSqlServer(configuration.GetConnectionString("Default")),ServiceLifetime.Scoped);
+            services.AddDbContext<db_ab9d6a_dbrenzContext>(o => o.UseSqlServer(configuration.GetConnectionString("Default")),ServiceLifetime.Scoped);
 
             //services.AddIdentity<User, Role>(cfg =>
             //{
