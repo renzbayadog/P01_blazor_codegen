@@ -6,8 +6,6 @@ WORKDIR /app
 COPY RenzGrandWeddingblazor.ph.csproj ./
 RUN dotnet restore
 
-COPY package*.json ./
-
 # Copy the rest of the source code
 COPY . .
 
@@ -25,7 +23,7 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY --from=build /app/out .
 
 CMD ["npm", "start"]
 
