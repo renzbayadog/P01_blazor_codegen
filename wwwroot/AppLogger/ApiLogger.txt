@@ -1,0 +1,15 @@
+2025-06-01 18:13:40.043 +08:00 [INF] An error occurred while saving the entity changes. See the inner exception for details.
+2025-06-01 21:39:50.844 +08:00 [INF] An error occurred while saving the entity changes. See the inner exception for details.
+2025-06-01 21:45:00.410 +08:00 [INF] Microsoft.Data.SqlClient.SqlException (0x80131904): Implicit conversion from data type nvarchar to varbinary(max) is not allowed. Use the CONVERT function to run this query.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:4278b268-f792-474f-9f4c-2115580040df
+Error Number:257,State:3,Class:16

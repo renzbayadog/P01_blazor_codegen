@@ -1,0 +1,252 @@
+@page "/Sales/Index"
+@using RenzGrandWeddingblazor.ph.Middleware
+@using RenzGrandWeddingblazor.ph.ViewModels 
+ @using RenzGrandWeddingblazor.ph.Data.Entities
+@using Newtonsoft.Json
+@using codegeneratorlib.Helpers
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>List Page</PageTitle>
+
+<!-- page content -->
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Sale Master List</h3>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content js-Sale-main-container">					
+					
+						<div class="row">
+							<!--BUTTON TOP-->
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<a href="/Sales/Create" class="btn btn-primary btn-md btn-custom float-left popup"><i class="fa fa-plus"></i> Create New Sale</a>
+								<button class="btn btn-primary btn-custom" id="js-export-Sale" @onclick="()=>ExportFile()"><i class="fa fa-download"></i> Export Record Report</button>
+							</div>
+
+							<div class="col-md-12 col-sm-12 col-xs-12 divider-dashed"></div>
+
+							<!--SEARCH AREA-->
+							<form class="form-horizontal" id="search-Sale-form" @onsubmit="()=>SearchSales()">
+								<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+									<label>Search by:</label>
+								<input class="form-control" id="js-Keyword-search" @bind="searchInfo.Keyword" />
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<label>Page Size:</label>
+									<select class="form-control" id="js-page-size" @bind="PageSize">
+										<option disabled>Max rows</option>
+										<option value="10">10</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+									</select>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12 form-group" style="margin-top:10px;">
+									<button type="submit" class="btn btn-primary btn-custom"><i class="fa fa-search"></i> Search</button>
+								</div>
+							</form>
+                        </div>
+
+						<div class="row">
+							<!--BULK BUTTON-->
+							<div class="col-md-12 col-sm-12 col-xs-12" style="display:none" id="js-delete-container">
+								<button class="btn btn-primary btn-md btn-custom fa fa-trash" id="js-delete-bulk">Delete</button>
+							</div>
+                             @if (pSales == null)
+                             {
+                                 <br />
+                                 <p>Loading..</p>
+                             }
+                             else
+                             {
+							<!--DATA TABLE-->
+							<div class="col-md-12 col-sm-12 col-xs-12 js-Sale-list-container">
+								<table class="table table-bordered bulk_action" id="js-table-Sale" style="margin-top:10px;">
+									<thead>
+										<tr>
+											<th class="column-title"><input type="checkbox" id="check-all" /></th>
+											<th class="column-title">Sales Name</th>
+											<th class="column-title">Sales Description</th>
+											<th class="column-title">Sales Date</th>
+											<th class="column-title">Business Value</th>
+											<th class="column-title no-link last"><span class="nobr">Action</span></th>
+										</tr>
+									</thead>
+									<tbody id="js-load-Sale-row">
+                                    @foreach (var Sales in pSales.List)
+                                     {
+                                       <tr id="selected-row-salesid">
+								<td><input type="checkbox" class="js-chk-bulk" data-id=''></td>
+									<td>@Sales.SalesName</td>
+									<td>@Sales.SalesDescription</td>
+									<td>@Sales.SalesDate</td>
+									<td>@Sales.BusinessValue</td>
+									<td><a href="/Sales/Details/@Sales.SalesId" class="popup"><i class="fa fa-info-circle"></i></a> <a href="/Sales/Update/@Sales.SalesId" class="popup"><i class="fa fa-edit"></i></a> <a @onclick="()=>DeleteSales(Sales.SalesId)" style="cursor:pointer" id="js-Sale-delete" data-id="SalesId"><i class="fa fa-trash-o"></i></a></td>
+								</tr>
+                                     }
+									</tbody>
+								</table>
+							</div>
+
+							 <!--PAGINATION AND SUMMARY-->
+							<div class="col-md-12 col-sm-12 col-xs-12 js-pagination-Sale" style="margin-top:-27px;">
+
+								<div id="js-page-history" style="float:left;margin-top:25px;color:#cc503b;">
+									<!--PAGINATION HISTORY-->
+                                    @pSales?.PageSummary
+								</div>
+
+								<div style="float:right;margin-top:20px;">
+									<ul class="pagination pagination-md" id="js-ul-pagination">
+                                    <!--LOAD PAGINATION-->
+                                    @* <li id="js-prev-btn"><a class="page-link" style="cursor:pointer;" @onclick="()=>ClickPaginationPrev()">&laquo;</a></li> *@
+                                    @for (var i = 0; i < @pSales?.PageIndices?.Count(); i++)
+                                    {
+                                        var pageNum = @pSales?.PageIndices?.ToArray()[i];
+
+                                        <li id="js-li-count-@pageNum" class="check page-item li-children-ref" data-id="@pageNum">
+                                            <a style="cursor:pointer;" class="page-link" id="click-User-pagination-@pageNum" @onclick="()=>ClickPagination(pageNum)" data-id="@pageNum">
+                                                @pageNum
+                                            </a>
+                                        </li>
+                                    }
+                                    @* <li id="js-next-btn"><a class="page-link" style="cursor:pointer;" @onclick="()=>ClickPaginationNext()">&raquo;</a></li> *@
+									</ul>
+							   </div>
+						</div>
+                       }
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    private SalesSearch searchInfo = new();
+    private Pagination<Sales> pSales;
+    private Sales oSales = new();
+    private string responseMessage;
+    private int PageSize = 10;
+    private int CurrentPage = 1;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var search = new SalesSearch();
+        search.Keyword = searchInfo?.Keyword;
+        var list = await LoadSales(CurrentPage, PageSize, search);
+        pSales = list;
+    }
+
+    private async Task ExportFile()
+    {
+        var restService = new RestService<ExcelData>();
+        //var json = JsonConvert.SerializeObject(search);
+        var result = new ServiceModel<ExcelData>();
+        result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Sales/export/report");
+        if (!result.IsSuccess)
+        {
+        }
+        else
+        {
+            var file = $"data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8;base64,{result.Data.File}";
+
+            NavigationManager.NavigateTo(file);
+        }
+    }
+
+    private async Task<Pagination<Sales>> LoadSales(int? currpage, int pagesize, SalesSearch search)
+    {
+        var restService = new RestService<Pagination<Sales>>();
+        //var json = JsonConvert.SerializeObject(search);
+        var result = new ServiceModel<Pagination<Sales>>();
+        result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Sales/List/Page{currpage}/PageSize{pagesize}?Keyword={search?.Keyword}");
+        if (!result.IsSuccess)
+        {
+            return pSales = null;
+        }
+        else
+        {
+            return pSales = result.Data;
+        }
+    }
+
+    private async Task SearchSales()
+    {
+        var search = new SalesSearch();
+        search.Keyword = searchInfo?.Keyword;
+        var pullout = await LoadSales(CurrentPage, PageSize, search);
+        pSales = pullout;
+
+        StateHasChanged();
+    }
+
+    public async Task DeleteSales(int id)
+    {
+        var restService = new RestService<List<Sales>>();
+
+        var result = new ServiceModel<List<Sales>>();
+
+        result = await restService.Delete($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Sales/{id}/delete");
+
+        if (!result.IsSuccess)
+        {
+            responseMessage = result.Error;
+        }
+        else
+        {
+            var search = new SalesSearch();
+            search.Keyword = searchInfo?.Keyword;
+            var list = await LoadSales(CurrentPage, PageSize, search);
+            pSales = list;
+        }
+
+        StateHasChanged();
+    }
+
+    private async Task ClickPagination(int? elementId)
+    {
+        var currrentPage = elementId;
+        var search = new SalesSearch();
+        search.Keyword = searchInfo?.Keyword;
+        var list = await LoadSales(currrentPage, PageSize, search);
+        pSales = list;
+        StateHasChanged();
+    }
+
+    private async Task ClickPaginationPrev()
+    {
+        var currrentPage = CurrentPage - 1;
+        var search = new SalesSearch();
+        search.Keyword = searchInfo?.Keyword;
+        var list = await LoadSales(currrentPage, PageSize, search);
+        pSales = list;
+        StateHasChanged();
+    }
+
+    private async Task ClickPaginationNext()
+    {
+        var currrentPage = CurrentPage + 1;
+        var search = new SalesSearch();
+        search.Keyword = searchInfo?.Keyword;
+        var list = await LoadSales(currrentPage, PageSize, search);
+        pSales = list;
+        StateHasChanged();
+    }
+}

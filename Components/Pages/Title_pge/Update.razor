@@ -1,0 +1,149 @@
+@page "/Title/Update/{Id:int}"
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using Newtonsoft.Json
+@using codegeneratorlib.Helpers
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Update Page</PageTitle>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h5>Title/Update</h5>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top:30px;">
+            <div class="x_panel">               
+                <div class="x_content Title-container">		
+				
+                    <div class="row">
+						<div class="modal-header">
+							<h5><b>Update Title Details</b></h5>
+						</div>
+
+                        <EditForm class="form-horizontal form-label-left" id="Title-form" Model="oTitleVM" OnValidSubmit="()=>SendRequest()">                           
+							<div class="modal-body">
+								<DataAnnotationsValidator />
+								<ValidationSummary />   
+								@if (!string.IsNullOrEmpty(responseMessage))
+								{
+							      <div class="alert alert-success" role="alert">
+							      	@responseMessage
+							      </div>
+								}
+								<input type="hidden" @bind="oTitleVM.TitleId" id=js-titleid/>
+								
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Title Name</label>	
+								<input @bind="oTitleVM.TitleName" id="js-titlename" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>T Itle Description</label>	
+								<input @bind="oTitleVM.TItleDescription" id="js-titledescription" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Product Line Name</label>	
+								<select @bind="oTitleVM.ProductLineId" id="js-productlineid" class="form-control"><option value="">-- Select --</option>@if (listProductLine != null){@foreach (var item in listProductLine){<option value="@item.ProductLineId">@item.ProductLineName</option>}}
+							</select>
+								
+							</div>
+							</div>	
+							 <div class="modal-footer">
+								  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								  
+									<a href="/Title/Index" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">
+									<i class="fa fa-close"></i> Cancel Request</a>
+
+							  		@if (Loading)
+                                    {
+										<button class="btn btn-primary btn-custom float-md-end" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                            <span role="status">Loading...</span>
+                                        </button>
+                                    }
+                                    else
+									{
+										<button class="btn btn-primary btn-custom float-md-end" type="submit">
+											<i class="fa fa-save"></i> Submit Request
+                                        </button>
+                                    }
+								 </div>	
+							 </div>
+                        </EditForm> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+	[Parameter]
+	public int Id { get; set; }
+	private TitleVM oTitleVM = new();
+	private string responseMessage;
+	private bool Loading = false;
+
+	private List<ProductLineVM> listProductLine = new();
+
+	//file upload
+	private async Task LoadFiles(InputFileChangeEventArgs e)
+	{
+		IBrowserFile file = e.File;
+		var buffer = new byte[file.Size];
+		await file.OpenReadStream().ReadAsync(buffer);
+		var bytes = $"{file.Name},{Convert.ToBase64String(buffer)}";
+		
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+
+		var restService = new RestService<TitleVM>();
+		var result = new ServiceModel<TitleVM>();
+		result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/GetById/{Id}");
+		if (!result.IsSuccess)
+		{
+			NavigationManager.NavigateTo("/Title/Index");
+		}
+		else
+		{
+			oTitleVM = result.Data;
+		}
+	}
+
+	private async Task SendRequest()
+	{
+		Loading = true;
+		var restService = new RestService<List<TitleVM>>();
+
+		var json = JsonConvert.SerializeObject(oTitleVM);
+
+		var result = new ServiceModel<List<TitleVM>>();
+
+		result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/update", json);
+
+		if (!result.IsSuccess)
+		{
+			responseMessage = result.Error;
+		}
+		else
+		{
+			responseMessage = "Request has been successfully submitted!";
+			oTitleVM = new();
+		}
+		
+		Loading = false;
+
+		StateHasChanged();
+	}
+}
+

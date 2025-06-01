@@ -1,0 +1,119 @@
+@page "/ProductLine/Create"
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using Newtonsoft.Json
+@using codegeneratorlib.Helpers
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Create Page</PageTitle>
+
+<div class="">
+    <div class="page-title">
+		<div class="title_left">
+            <h4>ProductLine/Create</h4>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">               
+                <div class="x_content ProductLine-container">
+                    <div class="row">
+						<div class="modal-header">
+							<h3>Create New ProductLine</h3>
+						</div>
+
+                        <EditForm class="form-horizontal form-label-left" id="ProductLine-form" Model="oProductLineVM" OnValidSubmit="()=>SendRequest()">                           
+							<div class="modal-body">
+							  <DataAnnotationsValidator />
+							  <ValidationSummary />
+							  @if (!string.IsNullOrEmpty(responseMessage))
+							  {
+							    <div class="alert alert-success" role="alert">
+							    	@responseMessage
+							    </div>
+							  }
+							  
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Product Line Code</label>	
+								<input @bind="oProductLineVM.ProductLineCode" id="js-productlinecode" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Product Line Name</label>	
+								<input @bind="oProductLineVM.ProductLineName" id="js-productlinename" class="form-control" />
+								
+							</div>
+							</div>
+							 <div class="modal-footer">
+							   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+									<a href="/ProductLine/Index" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">
+									<i class="fa fa-close"></i> Cancel Request</a>
+
+							  		@if (Loading)
+                                    {
+										<button class="btn btn-primary btn-custom float-md-end" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                            <span role="status">Loading...</span>
+                                        </button>
+                                    }
+                                    else
+									{
+										<button class="btn btn-primary btn-custom float-md-end" type="submit">
+											<i class="fa fa-save"></i> Submit Request
+                                        </button>
+                                    }
+								 </div>	
+							 </div>
+                        </EditForm> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+	private ProductLineVM oProductLineVM = new();
+	private string responseMessage;
+	private bool Loading = false;
+
+	//file upload
+	private async Task LoadFiles(InputFileChangeEventArgs e)
+	{
+		IBrowserFile file = e.File;
+		var buffer = new byte[file.Size];
+		await file.OpenReadStream().ReadAsync(buffer);
+		var bytes = $"{file.Name},{Convert.ToBase64String(buffer)}";
+		
+	}
+
+	private async Task SendRequest()
+	{
+		Loading = true;
+		var restService = new RestService<List<ProductLineVM>>();
+
+		var json = JsonConvert.SerializeObject(oProductLineVM);
+
+		var result = new ServiceModel<List<ProductLineVM>>();
+
+		result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/ProductLines/add", json);
+
+		if (!result.IsSuccess)
+		{
+			responseMessage = result.Error;
+		}
+		else
+		{
+			responseMessage = "Request has been successfully submitted!";
+			oProductLineVM = new();
+		}
+		
+		Loading = false;
+
+		StateHasChanged();
+	}
+}

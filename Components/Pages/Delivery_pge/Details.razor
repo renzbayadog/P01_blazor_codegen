@@ -1,0 +1,69 @@
+@page "/Delivery/Details/{Id:int}"
+@using RenzGrandWeddingblazor.ph.Middleware
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using codegeneratorlib.Helpers
+@using Newtonsoft.Json
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Details Page</PageTitle>
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h4>Delivery/Details</h4>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">               
+                <div class="x_content" style="margin-top:30px;">
+					<dl class="row">
+						<dt class="col-sm-3">Delivery Name</dt>
+						<dd class="col-sm-9">@oDeliveryVM.DeliveryName</dd>
+
+						<dt class="col-sm-3">Delivery Address</dt>
+						<dd class="col-sm-9">@oDeliveryVM.DeliveryAddress</dd>
+
+						<dt class="col-sm-3">Delivery Date</dt>
+						<dd class="col-sm-9">@oDeliveryVM.DeliveryDate</dd>
+
+						<dt class="col-sm-3">Business Value</dt>
+						<dd class="col-sm-9">@oDeliveryVM.BusinessValue</dd>
+
+					</dl>
+					<div>
+						<a href="/Delivery/Update/@Id" class="btn btn-primary">Update Details</a>
+						<a href="/Delivery/Index" class="btn btn-danger">Back To Deliveries</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	private DeliveryVM oDeliveryVM = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+
+		var restService = new RestService<DeliveryVM>();
+		//var json = JsonConvert.SerializeObject(search);
+		var result = new ServiceModel<DeliveryVM>();
+		result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Deliveries/GetById/{Id}");
+		if (!result.IsSuccess)
+		{
+			NavigationManager.NavigateTo("/Delivery/Index");
+		}
+		else
+		{
+			oDeliveryVM = result.Data;
+		}
+	}
+}
+

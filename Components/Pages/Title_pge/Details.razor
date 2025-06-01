@@ -1,0 +1,73 @@
+@page "/Title/Details/{Id:int}"
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using codegeneratorlib.Helpers
+@using Newtonsoft.Json
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Details Page</PageTitle>
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h5>Title/Update</h5>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">               
+                <div class="x_content" style="margin-top:30px;">
+				
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					<dl class="row">
+						<dt class="col-sm-3">Title Name:</dt>
+						<dd class="col-sm-9">@oTitleVM.TitleName</dd>
+
+						<dt class="col-sm-3">T Itle Description:</dt>
+						<dd class="col-sm-9">@oTitleVM.TItleDescription</dd>
+
+						<dt class="col-sm-3">Product Line Id:</dt>
+						<dd class="col-sm-9">@oTitleVM.ProductLineId</dd>
+
+						<dt class="col-sm-3">Product Line Code:</dt>
+						<dd class="col-sm-9">@oTitleVM.ProductLineCode</dd>
+
+						<dt class="col-sm-3">Product Line Name:</dt>
+						<dd class="col-sm-9">@oTitleVM.ProductLineName</dd>
+
+					</dl>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<a href="/Title/Index" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">Back To List</a>
+						<a href="/Title/Update/@Id" class="btn btn-primary btn-custom float-md-end">Update Details</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	private TitleVM oTitleVM = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		var restService = new RestService<TitleVM>();
+		//var json = JsonConvert.SerializeObject(search);
+		var result = new ServiceModel<TitleVM>();
+		result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/GetById/{Id}");
+		if (!result.IsSuccess)
+		{
+			NavigationManager.NavigateTo("/Title/Index");
+		}
+		else
+		{
+			oTitleVM = result.Data;
+		}
+	}
+}
+

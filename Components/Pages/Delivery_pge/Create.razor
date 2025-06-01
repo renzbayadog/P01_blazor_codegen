@@ -1,0 +1,129 @@
+@page "/Delivery/Create"
+@using RenzGrandWeddingblazor.ph.Middleware
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using Newtonsoft.Json
+@using codegeneratorlib.Helpers
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Create Page</PageTitle>
+
+<div class="">
+    <div class="page-title">
+		<div class="title_left">
+            <h4>Delivery/Create</h4>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">               
+                <div class="x_content Delivery-container">
+                    <div class="row">
+						<div class="modal-header">
+							<h3>Create New Delivery</h3>
+						</div>
+						
+                        <EditForm class="form-horizontal form-label-left" id="Delivery-form" Model="oDeliveryVM" OnValidSubmit="()=>SendRequest()">                           
+							<div class="modal-body">
+							  <DataAnnotationsValidator />
+							  <ValidationSummary />
+								@if (!string.IsNullOrEmpty(responseMessage))
+								{
+									<div class="alert alert-success" role="alert">
+										@responseMessage
+									</div>
+								}
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Delivery Name</label>	
+								<input @bind="oDeliveryVM.DeliveryName" id="js-deliveryname" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Delivery Address</label>	
+								<input @bind="oDeliveryVM.DeliveryAddress" id="js-deliveryaddress" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Delivery Date</label>	
+								<input type="date" @bind="oDeliveryVM.DeliveryDate" id="js-deliverydate" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Business Value</label>	
+								<input @bind="oDeliveryVM.BusinessValue" id="js-businessvalue" class="form-control" />
+								
+							</div>
+							</div>
+							 <div class="modal-footer">
+							   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+									<a href="/Delivery/Index" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">
+									<i class="fa fa-close"></i> Cancel Request</a>
+
+							  		@if (Loading)
+                                    {
+										<button class="btn btn-primary btn-custom float-md-end" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                            <span role="status">Loading...</span>
+                                        </button>
+                                    }
+                                    else
+									{
+										<button class="btn btn-primary btn-custom float-md-end" type="submit">
+											<i class="fa fa-save"></i> Submit Request
+                                        </button>
+                                    }
+								 </div>	
+							 </div>
+                        </EditForm> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+	private DeliveryVM oDeliveryVM = new();
+	private string responseMessage;
+	private bool Loading = false;
+
+	//file upload
+	private async Task LoadFiles(InputFileChangeEventArgs e)
+	{
+		IBrowserFile file = e.File;
+		var buffer = new byte[file.Size];
+		await file.OpenReadStream().ReadAsync(buffer);
+		var bytes = $"{file.Name},{Convert.ToBase64String(buffer)}";
+		//oDeliveryVM.ReceiptImage = bytes;
+	}
+
+	private async Task SendRequest()
+	{
+		Loading = true;
+		var restService = new RestService<List<DeliveryVM>>();
+
+		var json = JsonConvert.SerializeObject(oDeliveryVM);
+
+		var result = new ServiceModel<List<DeliveryVM>>();
+
+		result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Deliveries/add", json);
+
+		if (!result.IsSuccess)
+		{
+			responseMessage = result.Error;
+		}
+		else
+		{
+			responseMessage = "Request has been successfully submitted!";
+			oDeliveryVM = new();
+		}
+		
+		Loading = false;
+
+		StateHasChanged();
+	}
+}

@@ -1,0 +1,139 @@
+@page "/Pullout/Create"
+@using RenzGrandWeddingblazor.ph.Middleware
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using Newtonsoft.Json
+@using codegeneratorlib.Helpers
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Create Page</PageTitle>
+
+<div class="">
+    <div class="page-title">
+		<div class="title_left">
+            <h4>Pullout/Create</h4>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">               
+                <div class="x_content Pullout-container">
+                    <div class="row">
+						<div class="modal-header">
+							<h3>Create New Pullout</h3>
+						</div>
+						@if (!string.IsNullOrEmpty(responseMessage))
+						{
+							<div class="alert alert-success" role="alert">
+								@responseMessage
+							</div>
+						}
+                        <EditForm class="form-horizontal form-label-left" id="Pullout-form" Model="oPulloutVM" OnValidSubmit="()=>SendRequest()">                           
+							<div class="modal-body">
+							  <DataAnnotationsValidator />
+							  <ValidationSummary />
+							  
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Pullout Name</label>	
+								<input @bind="oPulloutVM.PulloutName" id="js-pulloutname" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Pullout Description</label>	
+								<textarea @bind="oPulloutVM.PulloutDescription" id="js-pulloutdescription" class="form-control"></textarea>
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Pullout Date</label>	
+								<input type="date" @bind="oPulloutVM.PulloutDate" id="js-pulloutdate" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Receipt Image</label>	
+								<InputFile OnChange="LoadFiles" id="js-file" class="form-control" multiple required/>
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Business Value</label>	
+								<input @bind="oPulloutVM.BusinessValue" id="js-businessvalue" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Pullout Price</label>	
+								<input @bind="oPulloutVM.PulloutPrice" id="js-pulloutprice" class="form-control" />
+								
+							</div>
+							</div>
+							 <div class="modal-footer">
+							   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+									<a href="/Pullout/Index" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">
+									<i class="fa fa-close"></i> Cancel Request</a>
+
+							  		@if (Loading)
+                                    {
+										<button class="btn btn-primary btn-custom float-md-end" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                            <span role="status">Loading...</span>
+                                        </button>
+                                    }
+                                    else
+									{
+										<button class="btn btn-primary btn-custom float-md-end" type="submit">
+											<i class="fa fa-save"></i> Submit Request
+                                        </button>
+                                    }
+								 </div>	
+							 </div>
+                        </EditForm> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+	private PulloutVM oPulloutVM = new();
+	private string responseMessage;
+	private bool Loading = false;
+
+	//file upload
+	private async Task LoadFiles(InputFileChangeEventArgs e)
+	{
+		IBrowserFile file = e.File;
+		var buffer = new byte[file.Size];
+		await file.OpenReadStream().ReadAsync(buffer);
+		var bytes = $"{file.Name},{Convert.ToBase64String(buffer)}";
+		oPulloutVM.ReceiptImage = bytes;
+	}
+
+	private async Task SendRequest()
+	{
+		Loading = true;
+		var restService = new RestService<List<PulloutVM>>();
+
+		var json = JsonConvert.SerializeObject(oPulloutVM);
+
+		var result = new ServiceModel<List<PulloutVM>>();
+
+		result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Pullouts/add", json);
+
+		if (!result.IsSuccess)
+		{
+			responseMessage = result.Error;
+		}
+		else
+		{
+			responseMessage = "Request has been successfully submitted!";
+			oPulloutVM = new();
+		}
+		
+		Loading = false;
+
+		StateHasChanged();
+	}
+}

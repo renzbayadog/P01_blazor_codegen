@@ -1,0 +1,74 @@
+@page "/Pullout/Details/{Id:int}"
+@using RenzGrandWeddingblazor.ph.Middleware
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using codegeneratorlib.Helpers
+@using Newtonsoft.Json
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Details Page</PageTitle>
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h4>Pullout/Details</h4>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">               
+                <div class="x_content" style="margin-top:30px;">
+					<dl class="row">
+						<dt class="col-sm-3">Pullout Name</dt>
+						<dd class="col-sm-9">@oPulloutVM.PulloutName</dd>
+
+						<dt class="col-sm-3">Pullout Description</dt>
+						<dd class="col-sm-9">@oPulloutVM.PulloutDescription</dd>
+
+						<dt class="col-sm-3">Pullout Date</dt>
+						<dd class="col-sm-9">@oPulloutVM.PulloutDate</dd>
+
+						<dt class="col-sm-3">Receipt Image</dt>
+						<dd class="col-sm-9"><img width="120" height="120" src='@oPulloutVM.ReceiptImage' alt="@oPulloutVM.ReceiptImage "/></dd>
+
+						<dt class="col-sm-3">Business Value</dt>
+						<dd class="col-sm-9">@oPulloutVM.BusinessValue</dd>
+
+						<dt class="col-sm-3">Pullout Price</dt>
+						<dd class="col-sm-9">@oPulloutVM.PulloutPrice</dd>
+
+					</dl>
+					<div>
+						<a href="/Pullout/Update/@Id" class="btn btn-primary">Update Details</a>
+						<a href="/Pullout/Index" class="btn btn-danger">Back To Pullouts</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	private PulloutVM oPulloutVM = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		var restService = new RestService<PulloutVM>();
+		//var json = JsonConvert.SerializeObject(search);
+		var result = new ServiceModel<PulloutVM>();
+		result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Pullouts/GetById/{Id}");
+		if (!result.IsSuccess)
+		{
+			NavigationManager.NavigateTo("/Pullout/Index");
+		}
+		else
+		{
+			oPulloutVM = result.Data;
+		}
+	}
+}
+
