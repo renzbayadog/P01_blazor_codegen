@@ -37,7 +37,7 @@
 							<!--SEARCH AREA-->
 							<form class="form-horizontal" id="search-Particular-form" @onsubmit="()=>SearchParticular()">
 								<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-									<label>Search by: (ParticularName, ParticularDescription)</label>
+									<label>Search by: (ParticularName)</label>
 								<input class="form-control" id="js-Keyword-search" @bind="searchInfo.Keyword" />
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
@@ -56,10 +56,6 @@
 									<button type="submit" class="btn btn-primary btn-custom"><i class="fa fa-search"></i> Search</button>
 								</div>
 							</form>
-
-                        <ParticularModal @ref="modalRef" ModalTitle="Particular">
-                            <p>This is modal content.</p>
-                        </ParticularModal>
                         </div>
 
 						<div class="row">
@@ -126,7 +122,6 @@
 							   </div>
 						</div>
                        }
-                       
 					</div>
 				</div>
             </div>
@@ -135,6 +130,9 @@
 </div>
 
 
+ <ParticularModal @ref="modalRef" ModalTitle="Particular">
+      <p>This is modal content.</p>
+ </ParticularModal>
 
 @code {
     private ParticularSearch searchInfo = new();

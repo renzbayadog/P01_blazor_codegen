@@ -15,7 +15,7 @@
 <div class="">
     <div class="page-title">
 		<div class="title_left">
-            <h4>Particular/Create</h4>
+            <h5>Particular/Create</h5>
         </div>
 		<hr />
     </div>
@@ -26,7 +26,7 @@
                 <div class="x_content Particular-container">
                     <div class="row">
 						<div class="modal-header">
-							<h3>Create New Particular</h3>
+							<h5><b>Create New Particular</b></h5>
 						</div>
 
                         <EditForm class="form-horizontal form-label-left" id="Particular-form" Model="oParticularVM" OnValidSubmit="()=>SendRequest()">                           
@@ -47,7 +47,7 @@
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
 								<label>Particular Description</label>	
-								<input @bind="oParticularVM.ParticularDescription" id="js-particulardescription" class="form-control" />
+								<textarea @bind="oParticularVM.ParticularDescription" id="js-particulardescription" class="form-control"></textarea>
 								
 							</div>
 							</div>

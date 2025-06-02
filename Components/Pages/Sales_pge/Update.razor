@@ -1,8 +1,10 @@
 @page "/Sales/Update/{Id:int}"
-@using RenzGrandWeddingblazor.ph.Middleware
 @using RenzGrandWeddingblazor.ph.ViewModels
 @using Newtonsoft.Json
 @using codegeneratorlib.Helpers
+@using RenzGrandWeddingblazor.ph.Data.Entities 
+ @using RenzGrandWeddingblazor.ph.Data.Repositories 
+ @inject IRepositoryWrapper repowrapper
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager;
 
@@ -11,7 +13,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h4>Sale/Update</h4>
+            <h5>Sale/Update</h5>
         </div>
 		<hr />
     </div>
@@ -23,38 +25,39 @@
 				
                     <div class="row">
 						<div class="modal-header">
-							<h3>Update Sale Details</h3>
+							<h5><b>Update Sale Details</b></h5>
 						</div>
-						@if (!string.IsNullOrEmpty(responseMessage))
-						{
-							<div class="alert alert-success" role="alert">
-								@responseMessage
-							</div>
-						}
+
                         <EditForm class="form-horizontal form-label-left" id="Sales-form" Model="oSalesVM" OnValidSubmit="()=>SendRequest()">                           
 							<div class="modal-body">
 								<DataAnnotationsValidator />
-								<ValidationSummary />      
+								<ValidationSummary />   
+								@if (!string.IsNullOrEmpty(responseMessage))
+								{
+							      <div class="alert alert-success" role="alert">
+							      	@responseMessage
+							      </div>
+								}
 								<input type="hidden" @bind="oSalesVM.SalesId" id=js-salesid/>
 								
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<label>Sales Name</label>
-									<input @bind="oSalesVM.SalesName" id="js-salesname" class="form-control" />
+								<label>Sales Name</label>	
+								<input @bind="oSalesVM.SalesName" id="js-salesname" class="form-control" />
 								
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<label>Sales Description</label>
-									<input @bind="oSalesVM.SalesDescription" id="js-salesdescription" class="form-control" />
+								<label>Sales Description</label>	
+								<textarea @bind="oSalesVM.SalesDescription" id="js-salesdescription" class="form-control"></textarea>
 								
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<label>Sales Date</label>
-									<input type="date" @bind="oSalesVM.SalesDate" id="js-salesdate" class="form-control" />
+								<label>Sales Date</label>	
+								<input type="date" @bind="oSalesVM.SalesDate" id="js-salesdate" class="form-control" />
 								
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<label>Business Value</label>
-									<input @bind="oSalesVM.BusinessValue" id="js-businessvalue" class="form-control" />
+								<label>Business Value</label>	
+								<input @bind="oSalesVM.BusinessValue" id="js-businessvalue" class="form-control" />
 								
 							</div>
 							</div>	
@@ -96,6 +99,8 @@
 	private string responseMessage;
 	private bool Loading = false;
 
+	
+
 	//file upload
 	private async Task LoadFiles(InputFileChangeEventArgs e)
 	{
@@ -103,13 +108,11 @@
 		var buffer = new byte[file.Size];
 		await file.OpenReadStream().ReadAsync(buffer);
 		var bytes = $"{file.Name},{Convert.ToBase64String(buffer)}";
-		//oSalesVM.ReceiptImage = bytes;
+		
 	}
 
 	protected override async Task OnInitializedAsync()
 	{
-		// Simulate asynchronous loading to demonstrate streaming rendering
-		await Task.Delay(500);
 
 		var restService = new RestService<SalesVM>();
 		var result = new ServiceModel<SalesVM>();
@@ -141,8 +144,8 @@
 		}
 		else
 		{
-			responseMessage = "Request has been successfully submitted!";
-			oSalesVM = new();
+			
+			NavigationManager.NavigateTo($"/Sales/Details/{Id}");
 		}
 		
 		Loading = false;

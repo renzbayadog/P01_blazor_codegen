@@ -147,8 +147,8 @@
 		}
 		else
 		{
-			responseMessage = "Request has been successfully submitted!";
-			oTitleVM = new();
+			
+			NavigationManager.NavigateTo($"/Title/Details/{Id}");
 		}
 		
 		Loading = false;

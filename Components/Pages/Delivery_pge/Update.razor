@@ -1,8 +1,10 @@
 @page "/Delivery/Update/{Id:int}"
-@using RenzGrandWeddingblazor.ph.Middleware
 @using RenzGrandWeddingblazor.ph.ViewModels
 @using Newtonsoft.Json
 @using codegeneratorlib.Helpers
+@using RenzGrandWeddingblazor.ph.Data.Entities 
+ @using RenzGrandWeddingblazor.ph.Data.Repositories 
+ @inject IRepositoryWrapper repowrapper
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager;
 
@@ -11,7 +13,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h4>Delivery/Update</h4>
+            <h5>Delivery/Update</h5>
         </div>
 		<hr />
     </div>
@@ -23,18 +25,19 @@
 				
                     <div class="row">
 						<div class="modal-header">
-							<h3>Update Delivery Details</h3>
+							<h5><b>Update Delivery Details</b></h5>
 						</div>
-						@if (!string.IsNullOrEmpty(responseMessage))
-						{
-							<div class="alert alert-success" role="alert">
-								@responseMessage
-							</div>
-						}
+
                         <EditForm class="form-horizontal form-label-left" id="Delivery-form" Model="oDeliveryVM" OnValidSubmit="()=>SendRequest()">                           
 							<div class="modal-body">
 								<DataAnnotationsValidator />
-								<ValidationSummary />      
+								<ValidationSummary />   
+								@if (!string.IsNullOrEmpty(responseMessage))
+								{
+							      <div class="alert alert-success" role="alert">
+							      	@responseMessage
+							      </div>
+								}
 								<input type="hidden" @bind="oDeliveryVM.DeliveryId" id=js-deliveryid/>
 								
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
@@ -96,6 +99,8 @@
 	private string responseMessage;
 	private bool Loading = false;
 
+	
+
 	//file upload
 	private async Task LoadFiles(InputFileChangeEventArgs e)
 	{
@@ -103,7 +108,7 @@
 		var buffer = new byte[file.Size];
 		await file.OpenReadStream().ReadAsync(buffer);
 		var bytes = $"{file.Name},{Convert.ToBase64String(buffer)}";
-		//oDeliveryVM.ReceiptImage = bytes;
+		
 	}
 
 	protected override async Task OnInitializedAsync()
@@ -139,8 +144,8 @@
 		}
 		else
 		{
-			responseMessage = "Request has been successfully submitted!";
-			oDeliveryVM = new();
+			
+			NavigationManager.NavigateTo($"/Delivery/Details/{Id}");
 		}
 		
 		Loading = false;

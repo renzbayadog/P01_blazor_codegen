@@ -55,7 +55,8 @@ public class db_ab9d6a_dbrenzContext : DbContext
         });
         builder.Entity<Particular>(entity => {
             entity.ToTable("Particular");
-        });
+			entity.HasKey(e => new { e.ParticularId });
+		});
 
         builder.Seed();
     }

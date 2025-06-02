@@ -1,5 +1,4 @@
 @page "/Delivery/Details/{Id:int}"
-@using RenzGrandWeddingblazor.ph.Middleware
 @using RenzGrandWeddingblazor.ph.ViewModels
 @using codegeneratorlib.Helpers
 @using Newtonsoft.Json
@@ -10,7 +9,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h4>Delivery/Details</h4>
+            <h5>Delivery/Update</h5>
         </div>
 		<hr />
     </div>
@@ -19,23 +18,26 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">               
                 <div class="x_content" style="margin-top:30px;">
+				
+					<div class="col-md-12 col-sm-12 col-xs-12">
 					<dl class="row">
-						<dt class="col-sm-3">Delivery Name</dt>
+						<dt class="col-sm-3">Delivery Name:</dt>
 						<dd class="col-sm-9">@oDeliveryVM.DeliveryName</dd>
 
-						<dt class="col-sm-3">Delivery Address</dt>
+						<dt class="col-sm-3">Delivery Address:</dt>
 						<dd class="col-sm-9">@oDeliveryVM.DeliveryAddress</dd>
 
-						<dt class="col-sm-3">Delivery Date</dt>
+						<dt class="col-sm-3">Delivery Date:</dt>
 						<dd class="col-sm-9">@oDeliveryVM.DeliveryDate</dd>
 
-						<dt class="col-sm-3">Business Value</dt>
+						<dt class="col-sm-3">Business Value:</dt>
 						<dd class="col-sm-9">@oDeliveryVM.BusinessValue</dd>
 
 					</dl>
-					<div>
-						<a href="/Delivery/Update/@Id" class="btn btn-primary">Update Details</a>
-						<a href="/Delivery/Index" class="btn btn-danger">Back To Deliveries</a>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<a href="/Delivery/Index" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">Back To List</a>
+						<a href="/Delivery/Update/@Id" class="btn btn-primary btn-custom float-md-end">Update Details</a>
 					</div>
                 </div>
             </div>
@@ -51,7 +53,6 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-
 		var restService = new RestService<DeliveryVM>();
 		//var json = JsonConvert.SerializeObject(search);
 		var result = new ServiceModel<DeliveryVM>();

@@ -1,5 +1,4 @@
 @page "/Sales/Index"
-@using RenzGrandWeddingblazor.ph.Middleware
 @using RenzGrandWeddingblazor.ph.ViewModels 
  @using RenzGrandWeddingblazor.ph.Data.Entities
 @using Newtonsoft.Json
@@ -27,16 +26,18 @@
 						<div class="row">
 							<!--BUTTON TOP-->
 							<div class="col-md-12 col-sm-12 col-xs-12">
-								<a href="/Sales/Create" class="btn btn-primary btn-md btn-custom float-left popup"><i class="fa fa-plus"></i> Create New Sale</a>
-								<button class="btn btn-primary btn-custom" id="js-export-Sale" @onclick="()=>ExportFile()"><i class="fa fa-download"></i> Export Record Report</button>
+                                <button class="btn btn-warning btn-custom float-end" id="js-export-Sale" style="margin-left:10px;" @onclick="()=>ExportFile()"><i class="fa fa-download"></i> Export Data</button>
+								<a href="/Sales/Create" class="btn btn-primary btn-custom float-end popup"><i class="fa fa-plus"></i> Create New</a>
 							</div>
 
-							<div class="col-md-12 col-sm-12 col-xs-12 divider-dashed"></div>
+							<div class="col-md-12 col-sm-12 col-xs-12 divider-dashed">
+                                <hr />
+                            </div>
 
 							<!--SEARCH AREA-->
 							<form class="form-horizontal" id="search-Sale-form" @onsubmit="()=>SearchSales()">
 								<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-									<label>Search by:</label>
+									<label>Search by: (SalesName, SalesDescription)</label>
 								<input class="form-control" id="js-Keyword-search" @bind="searchInfo.Keyword" />
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
@@ -71,7 +72,7 @@
                              {
 							<!--DATA TABLE-->
 							<div class="col-md-12 col-sm-12 col-xs-12 js-Sale-list-container">
-								<table class="table table-bordered bulk_action" id="js-table-Sale" style="margin-top:10px;">
+								<table class="table table-hover bulk_action" id="js-table-Sale" style="margin-top:10px;">
 									<thead>
 										<tr>
 											<th class="column-title"><input type="checkbox" id="check-all" /></th>
@@ -146,7 +147,7 @@
     protected override async Task OnInitializedAsync()
     {
         // Simulate asynchronous loading to demonstrate streaming rendering
-        await Task.Delay(500);
+        await Task.Delay(1000);
 
         var search = new SalesSearch();
         search.Keyword = searchInfo?.Keyword;

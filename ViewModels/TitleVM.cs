@@ -38,11 +38,11 @@ namespace RenzGrandWeddingblazor.ph.ViewModels
 		public string ProductLineCode { get; set; }
 
 		[Display(Name = "Product Line Name")]
-		[MaxLength(50)]
+		[MaxLength(100)]
 		public string ProductLineName { get; set; }
 
 		[Display(Name = "Particular Name")]
-		[MaxLength(50)]
+		[MaxLength(100)]
 		public string ParticularName { get; set; }
 
 		[Display(Name = "Particular Description")]

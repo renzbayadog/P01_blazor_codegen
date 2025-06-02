@@ -1,8 +1,12 @@
 @page "/Delivery/Create"
-@using RenzGrandWeddingblazor.ph.Middleware
 @using RenzGrandWeddingblazor.ph.ViewModels
 @using Newtonsoft.Json
 @using codegeneratorlib.Helpers
+
+@using RenzGrandWeddingblazor.ph.Data.Entities 
+ @using RenzGrandWeddingblazor.ph.Data.Repositories 
+ @inject IRepositoryWrapper repowrapper
+
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager;
 
@@ -11,7 +15,7 @@
 <div class="">
     <div class="page-title">
 		<div class="title_left">
-            <h4>Delivery/Create</h4>
+            <h5>Delivery/Create</h5>
         </div>
 		<hr />
     </div>
@@ -22,19 +26,20 @@
                 <div class="x_content Delivery-container">
                     <div class="row">
 						<div class="modal-header">
-							<h3>Create New Delivery</h3>
+							<h5><b>Create New Delivery</b></h5>
 						</div>
-						
+
                         <EditForm class="form-horizontal form-label-left" id="Delivery-form" Model="oDeliveryVM" OnValidSubmit="()=>SendRequest()">                           
 							<div class="modal-body">
 							  <DataAnnotationsValidator />
 							  <ValidationSummary />
-								@if (!string.IsNullOrEmpty(responseMessage))
-								{
-									<div class="alert alert-success" role="alert">
-										@responseMessage
-									</div>
-								}
+							  @if (!string.IsNullOrEmpty(responseMessage))
+							  {
+							    <div class="alert alert-success" role="alert">
+							    	@responseMessage
+							    </div>
+							  }
+							  
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
 								<label>Delivery Name</label>	
 								<input @bind="oDeliveryVM.DeliveryName" id="js-deliveryname" class="form-control" />
@@ -91,6 +96,8 @@
 	private string responseMessage;
 	private bool Loading = false;
 
+	
+
 	//file upload
 	private async Task LoadFiles(InputFileChangeEventArgs e)
 	{
@@ -98,7 +105,7 @@
 		var buffer = new byte[file.Size];
 		await file.OpenReadStream().ReadAsync(buffer);
 		var bytes = $"{file.Name},{Convert.ToBase64String(buffer)}";
-		//oDeliveryVM.ReceiptImage = bytes;
+		
 	}
 
 	private async Task SendRequest()
