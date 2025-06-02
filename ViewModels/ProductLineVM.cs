@@ -18,12 +18,12 @@ namespace RenzGrandWeddingblazor.ph.ViewModels
 		/*[Required(ErrorMessage = "Product Line Id is required")]*/
 		public int ProductLineId { get; set; }
 
-		[Display(Name = "Product Line Code")]
+		[Display(Name = "Product Line Code*")]
 		[Required(ErrorMessage = "Product Line Code is required")]
 		[MaxLength(100)]
 		public string ProductLineCode { get; set; }
 
-		[Display(Name = "Product Line Name")]
+		[Display(Name = "Product Line Name*")]
 		[Required(ErrorMessage = "Product Line Name is required")]
 		[MaxLength(100)]
 		public string ProductLineName { get; set; }
