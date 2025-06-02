@@ -142,7 +142,7 @@
 
 		var result = new ServiceModel<List<TitleVM>>();
 
-		if (Id != 0)
+		if (oTitleVM.TitleId != 0)
         {
 
             result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/Update", json);
