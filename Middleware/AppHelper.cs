@@ -23,7 +23,8 @@ namespace codegeneratorlib.Helpers
                     Username = _config["FtpClient:UserName"],
                     Password = _config["FtpClient:Password"],
                     DriveDirectory = _config["FtpClient:DriveDirectory"],
-                    PublicHost = _config["FtpClient:PublicHost"]
+                    PublicHost = _config["FtpClient:SiteHostName"],
+                    FileHostName = _config["FtpClient:FileHostName"]
                 };
             }
         }
