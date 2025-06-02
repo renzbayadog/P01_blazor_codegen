@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RenzGrandWeddingblazor.ph")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e4e183523292fdd9d7da36e70404878de49f937")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c75bc53b4e1798e004ac72affa029552274bbf9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("RenzGrandWeddingblazor.ph")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RenzGrandWeddingblazor.ph")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
