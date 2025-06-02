@@ -149,6 +149,34 @@
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\codegenSteps\\ScaffoldDB.png",
+      "PackagePath": "staticwebassets\\codegenSteps\\ScaffoldDB.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\codegenSteps\\SetupConfig.png",
+      "PackagePath": "staticwebassets\\codegenSteps\\SetupConfig.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\codegenSteps\\StepEnumeration.png",
+      "PackagePath": "staticwebassets\\codegenSteps\\StepEnumeration.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\codegenSteps\\step1.png",
+      "PackagePath": "staticwebassets\\codegenSteps\\step1.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\codegenSteps\\step2.png",
+      "PackagePath": "staticwebassets\\codegenSteps\\step2.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\codegenSteps\\step3.png",
+      "PackagePath": "staticwebassets\\codegenSteps\\step3.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\codegenSteps\\step4.png",
+      "PackagePath": "staticwebassets\\codegenSteps\\step4.png"
+    },
+    {
       "Id": "C:\\Users\\LENOVO\\Desktop\\CODEGENERATOR\\Projects\\RenzGrandWeddingblazor.ph\\RenzGrandWeddingblazor.ph\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
