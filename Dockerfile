@@ -30,7 +30,6 @@ WORKDIR /app
 COPY --from=build /app/out .
 # Copy wwwroot folder for static files
 COPY --from=build /app/wwwroot ./wwwroot
-COPY --from=build /app/wwwroot ./wwwroot/codegenSteps
 COPY --from=build /app/node_modules ./node_modules
 
 # Set environment variables
