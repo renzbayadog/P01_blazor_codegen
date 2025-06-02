@@ -48,8 +48,11 @@ namespace RenzGrandWeddingblazor.ph.Controllers
 					TitleName = title.TitleName,
 					TItleDescription = title.TItleDescription,
 					ProductLineId = title.ProductLine?.ProductLineId,
+					ParticularId = title.Particular?.ParticularId,
 					ProductLineCode = title.ProductLine?.ProductLineCode,
-					ProductLineName = title.ProductLine?.ProductLineName
+					ProductLineName = title.ProductLine?.ProductLineName,
+					ParticularName = title.Particular?.ParticularName,
+					ParticularDescription = title.Particular?.ParticularDescription
 				});
 			}
 
@@ -82,8 +85,11 @@ namespace RenzGrandWeddingblazor.ph.Controllers
 					TitleName = title.TitleName,
 					TItleDescription = title.TItleDescription,
 					ProductLineId = title.ProductLine?.ProductLineId,
+					ParticularId = title.Particular?.ParticularId,
 					ProductLineCode = title.ProductLine?.ProductLineCode,
-					ProductLineName = title.ProductLine?.ProductLineName
+					ProductLineName = title.ProductLine?.ProductLineName,
+					ParticularName = title.Particular?.ParticularName,
+					ParticularDescription = title.Particular?.ParticularDescription
 				};
 
 				return Ok(otitle);
@@ -112,7 +118,8 @@ namespace RenzGrandWeddingblazor.ph.Controllers
 			{
 				TitleName = title.TitleName,
 				TItleDescription = title.TItleDescription,
-				ProductLineId = title.ProductLineId
+				ProductLineId = title.ProductLineId,
+				ParticularId = title.ParticularId
 			};
 
             _titleRepository.Add(titleToAdd);
@@ -147,7 +154,8 @@ namespace RenzGrandWeddingblazor.ph.Controllers
 				TitleId = title.TitleId,
 				TitleName = title.TitleName,
 				TItleDescription = title.TItleDescription,
-				ProductLineId = title.ProductLineId
+				ProductLineId = title.ProductLineId,
+				ParticularId = title.ParticularId
 			};
 
             _titleRepository.Update(titleToUpdate);
@@ -228,8 +236,11 @@ namespace RenzGrandWeddingblazor.ph.Controllers
 					TitleName = title.TitleName,
 					TItleDescription = title.TItleDescription,
 					ProductLineId = title.ProductLine?.ProductLineId,
+					ParticularId = title.Particular?.ParticularId,
 					ProductLineCode = title.ProductLine?.ProductLineCode,
-					ProductLineName = title.ProductLine?.ProductLineName
+					ProductLineName = title.ProductLine?.ProductLineName,
+					ParticularName = title.Particular?.ParticularName,
+					ParticularDescription = title.Particular?.ParticularDescription
 				});
 			}
  
@@ -238,8 +249,11 @@ namespace RenzGrandWeddingblazor.ph.Controllers
 						dt.Columns.Add("TitleName", typeof(string));
 						dt.Columns.Add("TItleDescription", typeof(string));
 						dt.Columns.Add("ProductLineId", typeof(string));
+						dt.Columns.Add("ParticularId", typeof(string));
 						dt.Columns.Add("ProductLineCode", typeof(string));
 						dt.Columns.Add("ProductLineName", typeof(string));
+						dt.Columns.Add("ParticularName", typeof(string));
+						dt.Columns.Add("ParticularDescription", typeof(string));
 
             DataRow dr;
 
@@ -251,8 +265,11 @@ namespace RenzGrandWeddingblazor.ph.Controllers
 						dr[1] = item.TitleName;
 						dr[2] = item.TItleDescription;
 						dr[3] = item.ProductLineId;
-						dr[4] = item.ProductLineCode;
-						dr[5] = item.ProductLineName;
+						dr[4] = item.ParticularId;
+						dr[5] = item.ProductLineCode;
+						dr[6] = item.ProductLineName;
+						dr[7] = item.ParticularName;
+						dr[8] = item.ParticularDescription;
 
                 dt.Rows.Add(dr);
             }

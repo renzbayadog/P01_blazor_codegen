@@ -1,4 +1,4 @@
-@page "/Title/Index"
+@page "/Particular/Index"
 @using RenzGrandWeddingblazor.ph.ViewModels 
  @using RenzGrandWeddingblazor.ph.Data.Entities
 @using Newtonsoft.Json
@@ -13,7 +13,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Title Master List</h3>
+            <h3>Particular Master List</h3>
         </div>
     </div>
 
@@ -21,12 +21,12 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                <div class="x_content js-Title-main-container">					
+                <div class="x_content js-Particular-main-container">					
 					
 						<div class="row">
 							<!--BUTTON TOP-->
 							<div class="col-md-12 col-sm-12 col-xs-12">
-                                <button class="btn btn-warning btn-custom float-end" id="js-export-Title" style="margin-left:10px;" @onclick="()=>ExportFile()"><i class="fa fa-download"></i> Export Data</button>
+                                <button class="btn btn-warning btn-custom float-end" id="js-export-Particular" style="margin-left:10px;" @onclick="()=>ExportFile()"><i class="fa fa-download"></i> Export Data</button>
                                 <button class="btn btn-primary btn-custom float-end popup" @onclick="()=>OpenModal(0)"><i class="fa fa-plus"></i> Create New</button>
                             </div>
 
@@ -35,9 +35,9 @@
                             </div>
 
 							<!--SEARCH AREA-->
-							<form class="form-horizontal" id="search-Title-form" @onsubmit="()=>SearchTitle()">
+							<form class="form-horizontal" id="search-Particular-form" @onsubmit="()=>SearchParticular()">
 								<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-									<label>Search by: (TitleName, TItleDescription)</label>
+									<label>Search by: (ParticularName, ParticularDescription)</label>
 								<input class="form-control" id="js-Keyword-search" @bind="searchInfo.Keyword" />
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
@@ -57,9 +57,9 @@
 								</div>
 							</form>
 
-                        <TitleModal @ref="modalRef" ModalTitle="Title">
+                        <ParticularModal @ref="modalRef" ModalTitle="Particular">
                             <p>This is modal content.</p>
-                        </TitleModal>
+                        </ParticularModal>
                         </div>
 
 						<div class="row">
@@ -67,7 +67,7 @@
 							<div class="col-md-12 col-sm-12 col-xs-12" style="display:none" id="js-delete-container">
 								<button class="btn btn-primary btn-md btn-custom fa fa-trash" id="js-delete-bulk">Delete</button>
 							</div>
-                             @if (pTitles == null)
+                             @if (pParticulars == null)
                              {
                                  <br />
                                  <p>Loading..</p>
@@ -75,36 +75,24 @@
                              else
                              {
 							<!--DATA TABLE-->
-							<div class="col-md-12 col-sm-12 col-xs-12 js-Title-list-container">
-								<table class="table table-bordered bulk_action" id="js-table-Title" style="margin-top:10px;">
+							<div class="col-md-12 col-sm-12 col-xs-12 js-Particular-list-container">
+								<table class="table table-bordered bulk_action" id="js-table-Particular" style="margin-top:10px;">
 									<thead>
 										<tr>
 											<th class="column-title"><input type="checkbox" id="check-all" /></th>
-											<th class="column-title">Title Name</th>
-											<th class="column-title">T Itle Description</th>
-											<th class="column-title">Product Line Id</th>
-											<th class="column-title">Particular Id</th>
-											<th class="column-title">Product Line Code</th>
-											<th class="column-title">Product Line Name</th>
 											<th class="column-title">Particular Name</th>
 											<th class="column-title">Particular Description</th>
 											<th class="column-title no-link last"><span class="nobr">Action</span></th>
 										</tr>
 									</thead>
-									<tbody id="js-load-Title-row">
-                                    @foreach (var Title in pTitles.List)
+									<tbody id="js-load-Particular-row">
+                                    @foreach (var Particular in pParticulars.List)
                                      {
-                                       <tr id="selected-row-titleid">
+                                       <tr id="selected-row-particularid">
 								<td><input type="checkbox" class="js-chk-bulk" data-id=''></td>
-									<td>@Title.TitleName</td>
-									<td>@Title.TItleDescription</td>
-									<td>@Title.ProductLineId</td>
-									<td>@Title.ParticularId</td>
-									<td>@Title.ProductLineCode</td>
-									<td>@Title.ProductLineName</td>
-									<td>@Title.ParticularName</td>
-									<td>@Title.ParticularDescription</td>
-									<td><a href="/Title/Details/@Title.TitleId" class="popup"><i class="fa fa-info-circle"></i></a> <a style="cursor:pointer" @onclick="()=>OpenModal(Title.TitleId)" class="popup"><i class="fa fa-edit"></i></a> <a @onclick="()=>DeleteTitle(Title.TitleId)" style="cursor:pointer" id="js-Title-delete" data-id="TitleId"><i class="fa fa-trash-o"></i></a></td>
+									<td>@Particular.ParticularName</td>
+									<td>@Particular.ParticularDescription</td>
+									<td><a href="/Particular/Details/@Particular.ParticularId" class="popup"><i class="fa fa-info-circle"></i></a> <a style="cursor:pointer" @onclick="()=>OpenModal(Particular.ParticularId)" class="popup"><i class="fa fa-edit"></i></a> <a @onclick="()=>DeleteParticular(Particular.ParticularId)" style="cursor:pointer" id="js-Particular-delete" data-id="ParticularId"><i class="fa fa-trash-o"></i></a></td>
 								</tr>
                                      }
 									</tbody>
@@ -112,20 +100,20 @@
 							</div>
 
 							 <!--PAGINATION AND SUMMARY-->
-							<div class="col-md-12 col-sm-12 col-xs-12 js-pagination-Title" style="margin-top:-27px;">
+							<div class="col-md-12 col-sm-12 col-xs-12 js-pagination-Particular" style="margin-top:-27px;">
 
 								<div id="js-page-history" style="float:left;margin-top:25px;color:#cc503b;">
 									<!--PAGINATION HISTORY-->
-                                    @pTitles?.PageSummary
+                                    @pParticulars?.PageSummary
 								</div>
 
 								<div style="float:right;margin-top:20px;">
 									<ul class="pagination pagination-md" id="js-ul-pagination">
                                     <!--LOAD PAGINATION-->
                                     @* <li id="js-prev-btn"><a class="page-link" style="cursor:pointer;" @onclick="()=>ClickPaginationPrev()">&laquo;</a></li> *@
-                                    @for (var i = 0; i < @pTitles?.PageIndices?.Count(); i++)
+                                    @for (var i = 0; i < @pParticulars?.PageIndices?.Count(); i++)
                                     {
-                                        var pageNum = @pTitles?.PageIndices?.ToArray()[i];
+                                        var pageNum = @pParticulars?.PageIndices?.ToArray()[i];
 
                                         <li id="js-li-count-@pageNum" class="check page-item li-children-ref" data-id="@pageNum">
                                             <a style="cursor:pointer;" class="page-link" id="click-User-pagination-@pageNum" @onclick="()=>ClickPagination(pageNum)" data-id="@pageNum">
@@ -149,24 +137,24 @@
 
 
 @code {
-    private TitleSearch searchInfo = new();
-    private Pagination<TitleVM> pTitles;
-    private TitleVM oTitleVM = new();
+    private ParticularSearch searchInfo = new();
+    private Pagination<ParticularVM> pParticulars;
+    private ParticularVM oParticularVM = new();
     private string responseMessage;
     private int PageSize = 10;
     private int CurrentPage = 1;
 
-    private TitleModal modalRef;
+    private ParticularModal modalRef;
 
     protected override async Task OnInitializedAsync()
     {
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(1000);
 
-        var search = new TitleSearch();
+        var search = new ParticularSearch();
         search.Keyword = searchInfo?.Keyword;
-        var list = await LoadTitle(CurrentPage, PageSize, search);
-        pTitles = list;
+        var list = await LoadParticular(CurrentPage, PageSize, search);
+        pParticulars = list;
     }
 
     private async Task ExportFile()
@@ -174,7 +162,7 @@
         var restService = new RestService<ExcelData>();
         //var json = JsonConvert.SerializeObject(search);
         var result = new ServiceModel<ExcelData>();
-        result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/export/report");
+        result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/export/report");
         if (!result.IsSuccess)
         {
         }
@@ -186,19 +174,19 @@
         }
     }
 
-    private async Task<Pagination<TitleVM>> LoadTitle(int? currpage, int pagesize, TitleSearch search)
+    private async Task<Pagination<ParticularVM>> LoadParticular(int? currpage, int pagesize, ParticularSearch search)
     {
-        var restService = new RestService<Pagination<TitleVM>>();
+        var restService = new RestService<Pagination<ParticularVM>>();
         //var json = JsonConvert.SerializeObject(search);
-        var result = new ServiceModel<Pagination<TitleVM>>();
-        result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/List/Page{currpage}/PageSize{pagesize}?Keyword={search?.Keyword}");
+        var result = new ServiceModel<Pagination<ParticularVM>>();
+        result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/List/Page{currpage}/PageSize{pagesize}?Keyword={search?.Keyword}");
         if (!result.IsSuccess)
         {
-            return pTitles = null;
+            return pParticulars = null;
         }
         else
         {
-            return pTitles = result.Data;
+            return pParticulars = result.Data;
         }
     }
 
@@ -207,24 +195,24 @@
         await modalRef.Show(id);
     }
 
-    private async Task SearchTitle()
+    private async Task SearchParticular()
     {
-        var search = new TitleSearch();
+        var search = new ParticularSearch();
         search.Keyword = searchInfo?.Keyword;
-        var list = await LoadTitle(CurrentPage, PageSize, search);
-        pTitles = list;
+        var list = await LoadParticular(CurrentPage, PageSize, search);
+        pParticulars = list;
 
         StateHasChanged();
     }
 
-    private async Task CreateTitle()
+    private async Task CreateParticular()
     {
-        var restService = new RestService<List<TitleVM>>();
-        var result = new ServiceModel<List<TitleVM>>();
+        var restService = new RestService<List<ParticularVM>>();
+        var result = new ServiceModel<List<ParticularVM>>();
 
-        var json = JsonConvert.SerializeObject(oTitleVM);
+        var json = JsonConvert.SerializeObject(oParticularVM);
 
-        result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/add", json);
+        result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/add", json);
 
         if (!result.IsSuccess)
         {
@@ -232,24 +220,24 @@
         }
         else
         {
-            var search = new TitleSearch();
+            var search = new ParticularSearch();
             search.Keyword = searchInfo?.Keyword;
-            var list = await LoadTitle(CurrentPage, PageSize, search);
-            pTitles = list;
+            var list = await LoadParticular(CurrentPage, PageSize, search);
+            pParticulars = list;
         }
 
         StateHasChanged();
     }
 
-    private async Task UpdateTitle()
+    private async Task UpdateParticular()
     {
-        var restService = new RestService<List<TitleVM>>();
+        var restService = new RestService<List<ParticularVM>>();
 
-        var json = JsonConvert.SerializeObject(oTitleVM);
+        var json = JsonConvert.SerializeObject(oParticularVM);
 
-        var result = new ServiceModel<List<TitleVM>>();
+        var result = new ServiceModel<List<ParticularVM>>();
 
-        result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/update", json);
+        result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/update", json);
 
         if (!result.IsSuccess)
         {
@@ -257,22 +245,22 @@
         }
         else
         {
-            var search = new TitleSearch();
+            var search = new ParticularSearch();
             search.Keyword = searchInfo?.Keyword;
-            var list = await LoadTitle(CurrentPage, PageSize, search);
-            pTitles = list;
+            var list = await LoadParticular(CurrentPage, PageSize, search);
+            pParticulars = list;
         }
 
         StateHasChanged();
     }
 
-    public async Task DeleteTitle(int id)
+    public async Task DeleteParticular(int id)
     {
-        var restService = new RestService<List<TitleVM>>();
+        var restService = new RestService<List<ParticularVM>>();
 
-        var result = new ServiceModel<List<TitleVM>>();
+        var result = new ServiceModel<List<ParticularVM>>();
 
-        result = await restService.Delete($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/{id}/delete");
+        result = await restService.Delete($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/{id}/delete");
 
         if (!result.IsSuccess)
         {
@@ -280,10 +268,10 @@
         }
         else
         {
-            var search = new TitleSearch();
+            var search = new ParticularSearch();
             search.Keyword = searchInfo?.Keyword;
-            var list = await LoadTitle(CurrentPage, PageSize, search);
-            pTitles = list;
+            var list = await LoadParticular(CurrentPage, PageSize, search);
+            pParticulars = list;
         }
 
         StateHasChanged();
@@ -292,30 +280,30 @@
     private async Task ClickPagination(int? elementId)
     {
         var currrentPage = elementId;
-        var search = new TitleSearch();
+        var search = new ParticularSearch();
         search.Keyword = searchInfo?.Keyword;
-        var list = await LoadTitle(currrentPage, PageSize, search);
-        pTitles = list;
+        var list = await LoadParticular(currrentPage, PageSize, search);
+        pParticulars = list;
         StateHasChanged();
     }
 
     private async Task ClickPaginationPrev()
     {
         var currrentPage = CurrentPage - 1;
-        var search = new TitleSearch();
+        var search = new ParticularSearch();
         search.Keyword = searchInfo?.Keyword;
-        var list = await LoadTitle(currrentPage, PageSize, search);
-        pTitles = list;
+        var list = await LoadParticular(currrentPage, PageSize, search);
+        pParticulars = list;
         StateHasChanged();
     }
 
     private async Task ClickPaginationNext()
     {
         var currrentPage = CurrentPage + 1;
-        var search = new TitleSearch();
+        var search = new ParticularSearch();
         search.Keyword = searchInfo?.Keyword;
-        var list = await LoadTitle(currrentPage, PageSize, search);
-        pTitles = list;
+        var list = await LoadParticular(currrentPage, PageSize, search);
+        pParticulars = list;
         StateHasChanged();
     }
 }

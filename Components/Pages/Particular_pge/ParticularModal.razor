@@ -17,7 +17,7 @@
             <button class="close" @onclick="Hide">×</button>
         </div>
 
-        <EditForm class="form-horizontal form-label-left" id="Pullout-form" Model="oTitleVM" OnValidSubmit="()=>SendRequest()">
+        <EditForm class="form-horizontal form-label-left" id="Pullout-form" Model="oParticularVM" OnValidSubmit="()=>SendRequest()">
             <div class="modal-body">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -27,34 +27,22 @@
                         @responseMessage
                     </div>
                 }
-                <input type="hidden" @bind="oTitleVM.TitleId" id=js-titleid/>
+                <input type="hidden" @bind="oParticularVM.ParticularId" id=js-particularid/>
 				
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<label>Title Name</label>	
-								<input @bind="oTitleVM.TitleName" id="js-titlename" class="form-control" />
-								
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<label>T Itle Description</label>	
-								<input @bind="oTitleVM.TItleDescription" id="js-titledescription" class="form-control" />
-								
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<label>Product Line Name</label>	
-								<select @bind="oTitleVM.ProductLineId" id="js-productlineid" class="form-control"><option value="">-- Select --</option>@if (listProductLine != null){@foreach (var item in listProductLine){<option value="@item.ProductLineId">@item.ProductLineName</option>}}
-							</select>
-								
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
 								<label>Particular Name</label>	
-								<select @bind="oTitleVM.ParticularId" id="js-particularid" class="form-control"><option value="">-- Select --</option>@if (listParticular != null){@foreach (var item in listParticular){<option value="@item.ParticularId">@item.ParticularName</option>}}
-							</select>
+								<input @bind="oParticularVM.ParticularName" id="js-particularname" class="form-control" />
+								
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								<label>Particular Description</label>	
+								<input @bind="oParticularVM.ParticularDescription" id="js-particulardescription" class="form-control" />
 								
 							</div>
             </div>
             <div class="modal-footer">
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <a href="/Title/Index" @onclick="Hide" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">
+                    <a href="/Particular/Index" @onclick="Hide" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">
 					<i class="fa fa-close"></i> Cancel Request</a>
                     @if (Loading)
                     {
@@ -78,7 +66,7 @@
 @code {
     [Parameter]
 	public int Id { get; set; }
-	private TitleVM oTitleVM = new();
+	private ParticularVM oParticularVM = new();
 	private string responseMessage = "";
 	private bool Loading = false;
 
@@ -87,8 +75,7 @@
     [Parameter] public string ModalTitle { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    private List<ProductLine> listProductLine => repowrapper.ProductLine_Repository.FindAll().ToList();
-			private List<Particular> listParticular => repowrapper.Particular_Repository.FindAll().ToList();
+    
 
     //file upload
 	private async Task LoadFiles(InputFileChangeEventArgs e)
@@ -107,20 +94,20 @@
 
         if (id == 0)
         {
-            oTitleVM = new();
+            oParticularVM = new();
         }
         else
         {
-            var restService = new RestService<TitleVM>();
-            var result = new ServiceModel<TitleVM>();
-            result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/GetById/{id}");
+            var restService = new RestService<ParticularVM>();
+            var result = new ServiceModel<ParticularVM>();
+            result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/GetById/{id}");
             if (!result.IsSuccess)
             {
                 responseMessage = "Error while fetching data, Contact the administrator";
             }
             else
             {
-                oTitleVM = result.Data;
+                oParticularVM = result.Data;
             }
         }
     }
@@ -133,21 +120,21 @@
     private async Task SendRequest()
 	{
 		Loading = true;
-		var restService = new RestService<List<TitleVM>>();
+		var restService = new RestService<List<ParticularVM>>();
 
-		var json = JsonConvert.SerializeObject(oTitleVM);
+		var json = JsonConvert.SerializeObject(oParticularVM);
 
-		var result = new ServiceModel<List<TitleVM>>();
+		var result = new ServiceModel<List<ParticularVM>>();
 
-		if (oTitleVM.TitleId != 0)
+		if (oParticularVM.ParticularId != 0)
         {
 
-            result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/Update", json);
+            result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/Update", json);
         }
         else
         {
 
-            result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Titles/Add", json);
+            result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/Add", json);
         }
 
 		if (!result.IsSuccess)
@@ -157,7 +144,7 @@
 		else
 		{
 			responseMessage = "Request has been successfully submitted!";
-            oTitleVM = new();
+            oParticularVM = new();
 		}
         
 		Loading = false;

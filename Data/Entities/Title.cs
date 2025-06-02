@@ -7,5 +7,8 @@
         public string TItleDescription { get; set; }
         public int? ProductLineId { get; set; }
         public ProductLine ProductLine { get; set; }
+        public int? ParticularId { get; set; }
+        public Particular Particular { get; set; }
+
     }
 }

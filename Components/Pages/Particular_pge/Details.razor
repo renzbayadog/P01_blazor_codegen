@@ -1,0 +1,64 @@
+@page "/Particular/Details/{Id:int}"
+@using RenzGrandWeddingblazor.ph.ViewModels
+@using codegeneratorlib.Helpers
+@using Newtonsoft.Json
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager;
+
+<PageTitle>Details Page</PageTitle>
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h5>Particular/Update</h5>
+        </div>
+		<hr />
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">               
+                <div class="x_content" style="margin-top:30px;">
+				
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					<dl class="row">
+						<dt class="col-sm-3">Particular Name:</dt>
+						<dd class="col-sm-9">@oParticularVM.ParticularName</dd>
+
+						<dt class="col-sm-3">Particular Description:</dt>
+						<dd class="col-sm-9">@oParticularVM.ParticularDescription</dd>
+
+					</dl>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<a href="/Particular/Index" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">Back To List</a>
+						<a href="/Particular/Update/@Id" class="btn btn-primary btn-custom float-md-end">Update Details</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	private ParticularVM oParticularVM = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		var restService = new RestService<ParticularVM>();
+		//var json = JsonConvert.SerializeObject(search);
+		var result = new ServiceModel<ParticularVM>();
+		result = await restService.Get($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Particulars/GetById/{Id}");
+		if (!result.IsSuccess)
+		{
+			NavigationManager.NavigateTo("/Particular/Index");
+		}
+		else
+		{
+			oParticularVM = result.Data;
+		}
+	}
+}
+

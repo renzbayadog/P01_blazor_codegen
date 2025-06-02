@@ -20,6 +20,7 @@ public class db_ab9d6a_dbrenzContext : DbContext
     public DbSet<Pullout> Pullouts { get; set; }
     public DbSet<Sales> Sales { get; set; }
     public DbSet<ProductLine> ProductLines { get; set; }
+    public DbSet<Particular> Particulars { get; set; }
     public DbSet<Title> TItles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -51,6 +52,9 @@ public class db_ab9d6a_dbrenzContext : DbContext
 
         builder.Entity<Title>(entity => {
             entity.ToTable("TItle");
+        });
+        builder.Entity<Particular>(entity => {
+            entity.ToTable("Particular");
         });
 
         builder.Seed();

@@ -13,27 +13,26 @@ using codegeneratorlib.Helpers;
 
 namespace RenzGrandWeddingblazor.ph.Data.Repositories
 {
-    internal class TitleRepository : RepositoryBase<Title>, ITitleRepository
+    internal class ParticularRepository : RepositoryBase<Particular>, IParticularRepository
     {
         private readonly db_ab9d6a_dbrenzContext _context;
 
-        public TitleRepository(db_ab9d6a_dbrenzContext context) : base(context)
+        public ParticularRepository(db_ab9d6a_dbrenzContext context) : base(context)
         {
             _context = context;
         }
   
-        public async Task<List<Title>> GetAllTitleQry(TitleSearch searchInfo)
+        public async Task<List<Particular>> GetAllParticularQry(ParticularSearch searchInfo)
         {
-            List<Title> titles = await _context.TItles
-						.Include(productline => productline.ProductLine)
-						.Include(particular => particular.Particular)
+            List<Particular> particulars = await _context.Particulars
+						
 						.AsNoTracking().ToListAsync();
 			if (!String.IsNullOrEmpty(searchInfo.Keyword))
 			{
 				
-				titles = titles.Where(t => 
-									t.TitleName.ToString().ToUpper().Contains(searchInfo.Keyword.ToUpper())
-									|| t.TItleDescription.ToString().ToUpper().Contains(searchInfo.Keyword.ToUpper())
+				particulars = particulars.Where(p => 
+									p.ParticularName.ToString().ToUpper().Contains(searchInfo.Keyword.ToUpper())
+									|| p.ParticularDescription.ToString().ToUpper().Contains(searchInfo.Keyword.ToUpper())
 									)
 								.ToList();
 			}
@@ -52,17 +51,16 @@ namespace RenzGrandWeddingblazor.ph.Data.Repositories
 				//	}
 				//}
             
-            return titles;
+            return particulars;
         }
 
-		public async Task<Title> GetTitleById(int id)
+		public async Task<Particular> GetParticularById(int id)
         {
-            Title title = await _context.TItles
-                        .Include(productline => productline.ProductLine)
-						.Include(particular => particular.Particular)
-                        .AsNoTracking().FirstOrDefaultAsync(m => m.TitleId == id);
+            Particular particular = await _context.Particulars
+                        
+                        .AsNoTracking().FirstOrDefaultAsync(m => m.ParticularId == id);
 
-            return title;
+            return particular;
         }
 
     }
