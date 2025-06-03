@@ -17,7 +17,7 @@
             <div class="modal-body">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                @if (!string.IsNullOrEmpty(responseMessage))
+                @if (AlertShowMessage)
                 {
                     <div class="alert alert-success" role="alert">
                         @responseMessage
@@ -41,7 +41,7 @@
             </div>
             <div class="modal-footer">
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <a href="/ProductLine/Index" @onclick="Hide" class="btn btn-danger btn-custom float-md-end" style="margin-left:10px;">
+                    <a href="/ProductLine/Index" @onclick="Hide" class="btn btn-danger btn-custom float-md-end">
                         <i class="fa fa-close"></i> Cancel Request
                     </a>
                     @if (Loading)
@@ -75,6 +75,7 @@
     [Parameter] public RenderFragment ChildContent { get; set; }
 
     private ProductLineVM oProductLineVM = new();
+    private bool AlertShowMessage = false;
 
     //file upload
     private async Task LoadFiles(InputFileChangeEventArgs e)
@@ -131,26 +132,51 @@
         {
 
             result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/ProductLines/Update", json);
+
+            if (!result.IsSuccess)
+            {
+                responseMessage = result.Error;
+            }
+            else
+            {
+                Loading = false;
+
+                AlertShowMessage = true;
+                responseMessage = "Request has been successfully submitted!";
+
+                await InvokeAsync(() => StateHasChanged());
+
+                await Task.Delay(5000);
+
+                AlertShowMessage = false;
+            }
         }
         else
         {
 
             result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/ProductLines/Add", json);
+
+            if (!result.IsSuccess)
+            {
+                responseMessage = result.Error;
+            }
+            else
+            {
+                Loading = false;
+                oProductLineVM = new();
+
+                AlertShowMessage = true;
+                responseMessage = "Request has been successfully submitted!";
+
+                await InvokeAsync(() => StateHasChanged());
+
+                await Task.Delay(5000);
+
+                AlertShowMessage = false;
+            }
         }
 
-        if (!result.IsSuccess)
-        {
-            responseMessage = result.Error;
-        }
-        else
-        {
-            responseMessage = "Request has been successfully submitted!";
-            oProductLineVM = new();
-        }
-
-        Loading = false;
-        //responseMessage = "";
-        StateHasChanged();
+        
     }
 
 }

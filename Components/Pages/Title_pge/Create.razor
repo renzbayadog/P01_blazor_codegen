@@ -33,7 +33,7 @@
 							<div class="modal-body">
 							  <DataAnnotationsValidator />
 							  <ValidationSummary />
-							  @if (!string.IsNullOrEmpty(responseMessage))
+							@if (AlertShowMessage)
 							  {
 							    <div class="alert alert-success" role="alert">
 							    	@responseMessage
@@ -101,6 +101,7 @@
 	private List<ProductLine> listProductLine => repowrapper.ProductLine_Repository.FindAll().ToList();
 			private List<Particular> listParticular => repowrapper.Particular_Repository.FindAll().ToList();
 
+	private bool AlertShowMessage = false;
 	//file upload
 	private async Task LoadFiles(InputFileChangeEventArgs e)
 	{
@@ -128,12 +129,17 @@
 		}
 		else
 		{
-			responseMessage = "Request has been successfully submitted!";
+			Loading = false;
 			oTitleVM = new();
-		}
-		
-		Loading = false;
 
-		StateHasChanged();
+			AlertShowMessage = true;
+			responseMessage = "Request has been successfully submitted!";
+
+			await InvokeAsync(() => StateHasChanged());
+
+			await Task.Delay(10000);
+
+			AlertShowMessage = false;
+		}
 	}
 }

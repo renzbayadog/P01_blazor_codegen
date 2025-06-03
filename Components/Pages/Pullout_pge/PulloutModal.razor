@@ -17,7 +17,7 @@
             <div class="modal-body">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                @if (!string.IsNullOrEmpty(responseMessage))
+                @if (AlertShowMessage)
                 {
                     <div class="alert alert-success" role="alert">
                         @responseMessage
@@ -89,7 +89,7 @@
 
     [Parameter] public string Title { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; }
-
+    private bool AlertShowMessage = false;
     //file upload
     private async Task LoadFiles(InputFileChangeEventArgs e)
     {
@@ -143,11 +143,46 @@
         {
 
             result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Pullouts/Update", json);
+            if (!result.IsSuccess)
+            {
+                responseMessage = result.Error;
+            }
+            else
+            {
+                Loading = false;
+
+                AlertShowMessage = true;
+                responseMessage = "Request has been successfully submitted!";
+
+                await InvokeAsync(() => StateHasChanged());
+
+                await Task.Delay(5000);
+
+                AlertShowMessage = false;
+            }
         }
         else
         {
 
             result = await restService.Post($"{AppHelper.CDNFTPConfiguration.PublicHost}/api/Pullouts/Add", json);
+            if (!result.IsSuccess)
+            {
+                responseMessage = result.Error;
+            }
+            else
+            {
+                Loading = false;
+                oPulloutVM = new();
+
+                AlertShowMessage = true;
+                responseMessage = "Request has been successfully submitted!";
+
+                await InvokeAsync(() => StateHasChanged());
+
+                await Task.Delay(5000);
+
+                AlertShowMessage = false;
+            }
         }
 
         if (!result.IsSuccess)
